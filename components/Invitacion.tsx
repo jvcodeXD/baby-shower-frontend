@@ -27,7 +27,9 @@ const Invitacion = ({ invitado }: { invitado: { nombre: string } }) => (
       {/* Título de la invitación */}
       <Typography variant="h3" fontWeight="bold" color="primary" gutterBottom>
         {invitado.nombre}!
-        <Typography variant="h4">¡Estás invitado! 🎀</Typography>
+      </Typography>
+      <Typography variant="h4" color="primary">
+        ¡Estás invitado! 🎀
       </Typography>
 
       {/* Mensaje de los padres */}
@@ -47,7 +49,7 @@ const Invitacion = ({ invitado }: { invitado: { nombre: string } }) => (
       </Typography>
 
       <Typography variant="h6" color="textSecondary" paragraph>
-        y
+        e
       </Typography>
 
       <Typography

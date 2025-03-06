@@ -4,7 +4,7 @@ import {
   agregarInvitacion,
   obtenerTodasInvitaciones,
   eliminarInvitacion,
-} from "@/lib/data"; // Cambiado para usar el backend
+} from "@/lib/data";
 import {
   Container,
   TextField,
@@ -27,11 +27,10 @@ export default function AdminPage() {
     { id: string; nombre: string; hora: string }[]
   >([]);
 
-  // Cargar invitaciones desde el backend
   useEffect(() => {
     const fetchInvitaciones = async () => {
       try {
-        const data = await obtenerTodasInvitaciones(); // ✅ Llamada al backend
+        const data = await obtenerTodasInvitaciones();
         setInvitaciones(data);
       } catch (error) {
         console.error("Error al obtener invitaciones:", error);
@@ -46,7 +45,7 @@ export default function AdminPage() {
     if (!nombre || !hora) return alert("Por favor, completa todos los campos");
 
     try {
-      const id = await agregarInvitacion(nombre, hora); // ✅ Ahora es asíncrona
+      const id = await agregarInvitacion(nombre, hora);
       const data = await obtenerTodasInvitaciones();
       setInvitaciones(data);
       alert(`Invitación generada: /invitacion/${id}`);
@@ -60,7 +59,7 @@ export default function AdminPage() {
   // Eliminar invitación
   const borrarInvitacion = async (id: string) => {
     try {
-      await eliminarInvitacion(id); // ✅ Ahora es asíncrona
+      await eliminarInvitacion(id);
       const data = await obtenerTodasInvitaciones();
       setInvitaciones(data);
     } catch (error) {

@@ -12,8 +12,12 @@ const CuentaRegresiva: React.FC<CuentaRegresivaProps> = ({ fechaEvento }) => {
     minutos: 0,
     segundos: 0,
   });
+  const [clientSide, setClientSide] = useState(false);
 
+  // Solo ejecutamos la cuenta regresiva en el cliente
   useEffect(() => {
+    setClientSide(true); // Indicar que el componente se ha montado en el cliente
+
     const interval = setInterval(() => {
       const ahora = new Date();
       const diferencia = fechaEvento.getTime() - ahora.getTime();
@@ -32,10 +36,14 @@ const CuentaRegresiva: React.FC<CuentaRegresivaProps> = ({ fechaEvento }) => {
         const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
         setTiempoRestante({ dias, horas, minutos, segundos });
       }
-    }, 1000); // Actualiza cada segundo
+    }, 1000);
 
-    return () => clearInterval(interval); // Limpiar el intervalo al desmontar
+    return () => clearInterval(interval);
   }, [fechaEvento]);
+
+  if (!clientSide) {
+    return null; // Evitar que se muestre algo antes de que el componente se monte en el cliente
+  }
 
   return (
     <Box
@@ -48,7 +56,7 @@ const CuentaRegresiva: React.FC<CuentaRegresivaProps> = ({ fechaEvento }) => {
         variant="h5"
         fontWeight="bold"
         sx={{
-          color: "#ffffff", // Blanco para resaltar en la barra superior
+          color: "#ffffff",
           fontSize: "1.5rem",
         }}
       >
