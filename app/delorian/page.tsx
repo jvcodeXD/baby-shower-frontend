@@ -78,84 +78,86 @@ export default function AdminPage() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
-        <Typography variant="h4" align="center" gutterBottom>
-          Administrar Invitaciones
-        </Typography>
+    <>
+      <Container maxWidth="sm">
+        <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
+          <Typography variant="h4" align="center" gutterBottom>
+            Administrar Invitaciones
+          </Typography>
 
-        {/* Formulario */}
-        <Box display="flex" flexDirection="column" gap={2} mb={4}>
-          <TextField
-            label="Nombre del Invitado"
-            variant="outlined"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            label="Hora de Llegada"
-            type="time"
-            variant="outlined"
-            value={hora}
-            onChange={(e) => setHora(e.target.value)}
-            fullWidth
-          />
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={generarInvitacion}
-            fullWidth
-          >
-            Generar Invitación
-          </Button>
-        </Box>
+          {/* Formulario */}
+          <Box display="flex" flexDirection="column" gap={2} mb={4}>
+            <TextField
+              label="Nombre del Invitado"
+              variant="outlined"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              fullWidth
+            />
+            <TextField
+              label="Hora de Llegada"
+              type="time"
+              variant="outlined"
+              value={hora}
+              onChange={(e) => setHora(e.target.value)}
+              fullWidth
+            />
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              onClick={generarInvitacion}
+              fullWidth
+            >
+              Generar Invitación
+            </Button>
+          </Box>
 
-        {/* Lista de Invitaciones */}
-        <Typography variant="h6">Invitaciones Generadas:</Typography>
-        {invitaciones.length === 0 ? (
-          <Typography>No hay invitaciones aún.</Typography>
-        ) : (
-          <List>
-            {invitaciones.map((inv) => (
-              <ListItem
-                key={inv.id}
-                secondaryAction={
-                  <>
-                    <Tooltip title="Copiar enlace">
+          {/* Lista de Invitaciones */}
+          <Typography variant="h6">Invitaciones Generadas:</Typography>
+          {invitaciones.length === 0 ? (
+            <Typography>No hay invitaciones aún.</Typography>
+          ) : (
+            <List>
+              {invitaciones.map((inv) => (
+                <ListItem
+                  key={inv.id}
+                  secondaryAction={
+                    <>
+                      <Tooltip title="Copiar enlace">
+                        <IconButton
+                          onClick={() => copiarLink(inv.id)}
+                          color="primary"
+                        >
+                          <ContentCopyIcon />
+                        </IconButton>
+                      </Tooltip>
                       <IconButton
-                        onClick={() => copiarLink(inv.id)}
-                        color="primary"
+                        edge="end"
+                        onClick={() => borrarInvitacion(inv.id)}
+                        color="error"
                       >
-                        <ContentCopyIcon />
+                        <DeleteIcon />
                       </IconButton>
-                    </Tooltip>
-                    <IconButton
-                      edge="end"
-                      onClick={() => borrarInvitacion(inv.id)}
-                      color="error"
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </>
-                }
-              >
-                <ListItemText
-                  primary={`${inv.nombre} - ${inv.hora}`}
-                  secondary={
-                    <a
-                      href={`${BASE_URL}/invitacion/${inv.id}`}
-                      style={{ color: "#1976d2" }}
-                    >
-                      Ver invitación
-                    </a>
+                    </>
                   }
-                />
-              </ListItem>
-            ))}
-          </List>
-        )}
-      </Paper>
-    </Container>
+                >
+                  <ListItemText
+                    primary={`${inv.nombre} - ${inv.hora}`}
+                    secondary={
+                      <a
+                        href={`${BASE_URL}/invitacion/${inv.id}`}
+                        style={{ color: "#1976d2" }}
+                      >
+                        Ver invitación
+                      </a>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </Paper>
+      </Container>
+    </>
   );
 }
