@@ -2,7 +2,7 @@ import { AppBar, Toolbar, Typography } from "@mui/material";
 import CuentaRegresiva from "./CuentaRegresiva";
 
 // Fecha del evento (ajusta a la fecha real del baby shower)
-const fechaEvento = new Date("2025-03-15T18:00:00Z");
+const fechaEvento = new Date("2025-03-15T22:00:00Z");
 
 const BarraSuperior = () => (
   <AppBar
