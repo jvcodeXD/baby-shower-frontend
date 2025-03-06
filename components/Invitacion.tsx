@@ -22,12 +22,12 @@ const Invitacion = ({ invitado }: { invitado: { nombre: string } }) => (
         {invitado.nombre}!
       </Typography>
       <Typography variant="h4" color="primary">
-        ¡Estás invitado! 🎀
+        ¡Estás invitad@! 🎀
       </Typography>
 
       {/* Mensaje de los padres */}
       <Typography variant="h5" color="textSecondary" paragraph>
-        Con mucho amor, te invitamos a acompañarnos en el Baby Shower de nuestro
+        Con mucho amor, te invitamos a acompañarnos en el Baby Shower de nuestra
         bebé. Somos:
       </Typography>
 
