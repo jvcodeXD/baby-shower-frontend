@@ -6,7 +6,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm">
       <Paper
         elevation={3}
         sx={{ p: 6, mt: 4, textAlign: "center", bgcolor: "#ffe6f2" }}
