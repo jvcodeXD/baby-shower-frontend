@@ -16,9 +16,13 @@ import {
   IconButton,
   Box,
   Paper,
+  Tooltip,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+
+const BASE_URL = "https://baby-shower-page.vercel.app";
 
 export default function AdminPage() {
   const [nombre, setNombre] = useState("");
@@ -26,6 +30,7 @@ export default function AdminPage() {
   const [invitaciones, setInvitaciones] = useState<
     { id: string; nombre: string; hora: string }[]
   >([]);
+  const [copiado, setCopiado] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchInvitaciones = async () => {
@@ -40,7 +45,6 @@ export default function AdminPage() {
     fetchInvitaciones();
   }, []);
 
-  // Generar nueva invitación
   const generarInvitacion = async () => {
     if (!nombre || !hora) return alert("Por favor, completa todos los campos");
 
@@ -48,7 +52,7 @@ export default function AdminPage() {
       const id = await agregarInvitacion(nombre, hora);
       const data = await obtenerTodasInvitaciones();
       setInvitaciones(data);
-      alert(`Invitación generada: /invitacion/${id}`);
+      alert(`Invitación generada: ${BASE_URL}/invitacion/${id}`);
       setNombre("");
       setHora("");
     } catch (error) {
@@ -56,7 +60,6 @@ export default function AdminPage() {
     }
   };
 
-  // Eliminar invitación
   const borrarInvitacion = async (id: string) => {
     try {
       await eliminarInvitacion(id);
@@ -65,6 +68,13 @@ export default function AdminPage() {
     } catch (error) {
       console.error("Error al eliminar invitación:", error);
     }
+  };
+
+  const copiarLink = (id: string) => {
+    const link = `${BASE_URL}/invitacion/${id}`;
+    navigator.clipboard.writeText(link);
+    setCopiado(id);
+    setTimeout(() => setCopiado(null), 2000);
   };
 
   return (
@@ -111,20 +121,30 @@ export default function AdminPage() {
               <ListItem
                 key={inv.id}
                 secondaryAction={
-                  <IconButton
-                    edge="end"
-                    onClick={() => borrarInvitacion(inv.id)}
-                    color="error"
-                  >
-                    <DeleteIcon />
-                  </IconButton>
+                  <>
+                    <Tooltip title="Copiar enlace">
+                      <IconButton
+                        onClick={() => copiarLink(inv.id)}
+                        color="primary"
+                      >
+                        <ContentCopyIcon />
+                      </IconButton>
+                    </Tooltip>
+                    <IconButton
+                      edge="end"
+                      onClick={() => borrarInvitacion(inv.id)}
+                      color="error"
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </>
                 }
               >
                 <ListItemText
                   primary={`${inv.nombre} - ${inv.hora}`}
                   secondary={
                     <a
-                      href={`/invitacion/${inv.id}`}
+                      href={`${BASE_URL}/invitacion/${inv.id}`}
                       style={{ color: "#1976d2" }}
                     >
                       Ver invitación
