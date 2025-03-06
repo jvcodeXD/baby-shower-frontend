@@ -30,6 +30,7 @@ export default function AdminPage() {
   const [invitaciones, setInvitaciones] = useState<
     { id: string; nombre: string; hora: string }[]
   >([]);
+
   const [copiado, setCopiado] = useState<string | null>(null);
 
   useEffect(() => {
@@ -121,6 +122,13 @@ export default function AdminPage() {
             Generar Invitación
           </Button>
         </Box>
+
+        {/* Mensaje de copia de enlace */}
+        {copiado && (
+          <Typography variant="body2" color="primary" align="center" mb={2}>
+            ¡Enlace copiado exitosamente!
+          </Typography>
+        )}
 
         {/* Lista de Invitaciones */}
         <Typography variant="h6">Invitaciones Generadas:</Typography>
