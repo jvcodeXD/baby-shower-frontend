@@ -1,12 +1,5 @@
 import { Paper, Typography, Box } from "@mui/material";
 import CelebrationIcon from "@mui/icons-material/Celebration";
-import { Dancing_Script } from "next/font/google";
-
-// ✅ Importamos correctamente Dancing Script
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 const Invitacion = ({ invitado }: { invitado: { nombre: string } }) => (
   <Box sx={{ display: "flex", justifyContent: "center", p: 4 }}>

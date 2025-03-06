@@ -1,16 +1,19 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 const Portada = () => (
   <Box
     sx={{
-      display: "flex", // Usamos flexbox para la disposición
-      alignItems: "center", // Centrar verticalmente
-      justifyContent: "space-between", // Separar el texto y la imagen
-      height: "100vh", // Ocupa toda la altura de la pantalla
-      backgroundImage: "url('/portada.png')", // Reemplaza con la ruta de tu imagen
-      backgroundSize: "cover", // Asegura que la imagen cubra todo el espacio
-      backgroundPosition: "center", // Centrar la imagen
-      padding: "0 2rem", // Espaciado a los lados
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: "100vh",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      padding: "0 2rem",
+      backgroundImage: {
+        xs: "url('/portada1.png')", // Imagen para celulares
+        sm: "url('/portada.png')", // Imagen para tablets y pantallas más grandes
+      },
     }}
   ></Box>
 );
