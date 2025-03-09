@@ -4,7 +4,7 @@ import {
   agregarInvitacion,
   obtenerTodasInvitaciones,
   eliminarInvitacion,
-} from "@/lib/data";
+} from "../services/invitaciones";
 import {
   Container,
   TextField,
@@ -22,14 +22,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
-const BASE_URL = "https://baby-shower-page.vercel.app";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function AdminPage() {
   const [nombre, setNombre] = useState("");
   const [hora, setHora] = useState("");
   const [invitaciones, setInvitaciones] = useState<
     { id: string; nombre: string; hora: string }[]
-  >([]);
+  >([]); // Inicializamos como un array vacío
 
   const [copiado, setCopiado] = useState<string | null>(null);
 
@@ -37,6 +37,7 @@ export default function AdminPage() {
     const fetchInvitaciones = async () => {
       try {
         const data = await obtenerTodasInvitaciones();
+        console.log(data);
         setInvitaciones(data);
       } catch (error) {
         console.error("Error al obtener invitaciones:", error);
