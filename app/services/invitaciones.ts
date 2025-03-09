@@ -9,7 +9,7 @@ export const obtenerTodasInvitaciones = async () => {
     const respuesta = await axios.get(BASE_URL);
     return respuesta.data;
   } catch (error) {
-    console.log("Error al obtener las invitaciones");
+    console.log("Error al obtener las invitaciones", error);
   }
 };
 
@@ -19,7 +19,7 @@ export const agregarInvitacion = async (nombre: string, hora: string) => {
     const respuesta = await axios.post(BASE_URL, { nombre, hora });
     return respuesta.data.id; // 📌 Ahora devuelve un UUID
   } catch (error) {
-    console.log("Error al agregar la invitación");
+    console.log("Error al agregar la invitación", error);
   }
 };
 
@@ -29,6 +29,7 @@ export const obtenerInvitacion = async (id: string) => {
     const respuesta = await axios.get(`${BASE_URL}/${id}`);
     return respuesta.data;
   } catch (error) {
+    console.log("Error", error);
     return null;
   }
 };
@@ -38,6 +39,6 @@ export const eliminarInvitacion = async (id: string) => {
   try {
     await axios.delete(`${BASE_URL}/${id}`);
   } catch (error) {
-    console.log("Error al eliminar la invitación");
+    console.log("Error al eliminar la invitación", error);
   }
 };
