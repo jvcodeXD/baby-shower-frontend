@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { obtenerInvitacion } from "@/lib/data";
 import BarraSuperior from "@/components/BarraSuperior";
 import Portada from "@/components/Portada";
 import Invitacion from "@/components/Invitacion";
 import DetallesEvento from "@/components/DetallesEvento";
 import { Container, Paper, Typography, Button, Box } from "@mui/material";
+import { obtenerInvitacion } from "@/app/services/invitaciones";
 
 export default function InvitacionPage() {
   const { id } = useParams();
